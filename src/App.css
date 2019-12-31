@@ -1,7 +1,7 @@
 .App {
   text-align: center;
 }
-
+$rhap_theme-color: #868686 !default;
 .App-logo {
   height: 40vmin;
   pointer-events: none;
