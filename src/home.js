@@ -8,23 +8,49 @@ const audioList1 = [
     {
       name: '高尚',
       singer: '薛之谦',
-     // cover: '//cdn.lijinke.cn/nande.jpg',
+     cover: '//cdn.lijinke.cn/nande.jpg',
       cover: 'https://miketricking.github.io/bootstrap-image-hover/images/cac.jpg',
       musicSrc: '//cdn.lijinke.cn/gaoshang.mp3',
       showLyric: true    
+    },
+     {
+       name: 'Despacito',
+       singer: 'Luis Fonsi',
+       cover:  'http://res.cloudinary.com/alick/image/upload/v1502689731/Despacito_uvolhp.jpg',
+       musicSrc: () => {
+         return Promise.resolve(
+           'http://res.cloudinary.com/alick/video/upload/v1502689683/Luis_Fonsi_-_Despacito_ft._Daddy_Yankee_uyvqw9.mp3'
+         )
+       },
+       showLyric: true
+     }
+  ];
+  const audioList2 = [
+    {
+      name: 'Bedtime Stories',
+      singer: 'Jay Chou',
+      cover:
+        'http://res.cloudinary.com/alick/image/upload/v1502375978/bedtime_stories_bywggz.jpg',
+      musicSrc:
+        'http://res.cloudinary.com/alick/video/upload/v1502375674/Bedtime_Stories.mp3'
+    },
+    {
+      name: 'Dorost Nemisham',
+      singer: 'Sirvan Khosravi',
+      cover:
+        'https://res.cloudinary.com/ehsanahmadi/image/upload/v1573758778/Sirvan-Khosravi-Dorost-Nemisham_glicks.jpg',
+      musicSrc: () => {
+        return Promise.resolve(
+          'https://res.cloudinary.com/ehsanahmadi/video/upload/v1573550770/Sirvan-Khosravi-Dorost-Nemisham-128_kb8urq.mp3'
+        )
+      }
+    },
+    {
+      name: '难得',
+      singer: '安来宁',
+      cover: '//cdn.lijinke.cn/nande.jpg',
+      musicSrc: '//cdn.lijinke.cn/nande.mp3'
     }
-    //,
-    // {
-    //   name: 'Despacito',
-    //   singer: 'Luis Fonsi',
-    //   cover:  'http://res.cloudinary.com/alick/image/upload/v1502689731/Despacito_uvolhp.jpg',
-    //   musicSrc: () => {
-    //     return Promise.resolve(
-    //       'http://res.cloudinary.com/alick/video/upload/v1502689683/Luis_Fonsi_-_Despacito_ft._Daddy_Yankee_uyvqw9.mp3'
-    //     )
-    //   },
-    //   showLyric: true
-    // }
   ]
 
  const options = {
@@ -33,9 +59,10 @@ const audioList1 = [
     theme: 'dark',
     bounds: 'body',
     mode: 'full',
-    remember: "true",
+    //remember: "false",
     preload: "auto",
-    //autoPlay: true,
+    autoPlay: true,
+    autoPlayInitLoadPlayList: 1,
   }
 
 
@@ -43,21 +70,45 @@ class Home extends Component {
     constructor(props){
         super(props);
         this.state = {params:options}
-        this.state.params.audioLists[0].name = "asdasd";
+       
 
    } 
-
+//    (song.name,song.singer,song.cover,song.musicSrc)
    //this.setState({'name':'asdas'})
-   onChangeToSecondAudioList = (song) => {
-    console.log(song);
-    // const data = {
-    //   ...this.state.params,
-    //   clearPriorAudioLists: true,
-    //   audioLists: audioList2
-    // }
-    // this.setState({
-    //   params: data
-    // })
+
+   onChangeToSecondAudioList = () => {
+    const data = {
+      ...this.state.params,
+      clearPriorAudioLists: true,      
+      audioLists: audioList2
+    }
+    this.setState({
+      params: data
+    })
+  }
+   onChangeToSecondAudioList = (name,singer,cover,src) => {
+    
+    const audioList2 = [
+        {
+            name: name,
+            singer: singer,
+            cover: cover,
+            cover: cover,
+            musicSrc: src,
+            showLyric: true    
+        }]
+        
+
+
+    const data = {
+      ...this.state.params,      
+      clearPriorAudioLists: true,
+      preload: true,
+      audioLists: audioList2
+    }
+    this.setState({
+      params: data
+    })
   }
     render() { 
         //console.log(audioList1);
@@ -108,7 +159,7 @@ class Home extends Component {
                                                                 <img src={song.cover} alt="img" />
                                                                 <div className="release_content_artist release_content_artist2">
                                                                     <p><a href="http://webstrot.com/html/tunein/html/index3.html#">{song.singer}</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">{song.singer}</a></p>
+                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">{song.name}</a></p>
                                                                 </div>
                                                                 <div className="m24_treanding_box_overlay release_box_overlay">
                                                                     <div className="m24_tranding_box_overlay"></div>
@@ -123,7 +174,9 @@ class Home extends Component {
                                                                         <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
                                                                     </ul>
                                                                     <div className="tranding_play_icon">
-                                                                        <a  className="sanjay" onClick="dssdf">
+                                                                        {/* <a className="sanjay" onClick={()=>{this.state.params.audioLists[0].name = this.song.name;this.state.params.audioLists[0].singer = this.song.singer;this.state.params.audioLists[0].musicSrc = this.song.musicSrc; }}> */}
+                                                                        {/* // this.onChangeToSecondAudioList(song.name,song.singer,song.cover,song.musicSrc) */}
+                                                                        <a className="sanjay" onClick={()=>this.onChangeToSecondAudioList(song.name,song.singer,song.cover,song.musicSrc)}>
                                                                             <i className="flaticon-play-button"></i>
                                                                         </a>
                                                                     </div>
