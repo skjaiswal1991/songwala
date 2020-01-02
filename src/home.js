@@ -8,9 +8,12 @@ const audioList1 = [
     {
       name: '高尚',
       singer: '薛之谦',
-     cover: '//cdn.lijinke.cn/nande.jpg',
-      cover: 'https://miketricking.github.io/bootstrap-image-hover/images/cac.jpg',
-      musicSrc: '//cdn.lijinke.cn/gaoshang.mp3',
+      cover: '//cdn.lijinke.cn/nande.jpg',
+      musicSrc: () => {
+         return Promise.resolve(
+           '//cdn.lijinke.cn/gaoshang.mp3'
+         )
+       },      
       showLyric: true    
     },
      {
@@ -23,9 +26,8 @@ const audioList1 = [
          )
        },
        showLyric: true
-     }
-  ];
-  const audioList2 = [
+     },
+ 
     {
       name: 'Bedtime Stories',
       singer: 'Jay Chou',
@@ -59,10 +61,10 @@ const audioList1 = [
     theme: 'dark',
     bounds: 'body',
     mode: 'full',
-    //remember: "false",
+    remember: false,
     preload: "auto",
     autoPlay: true,
-    autoPlayInitLoadPlayList: 1,
+    autoPlayInitLoadPlayList: true
   }
 
 
@@ -76,23 +78,22 @@ class Home extends Component {
 //    (song.name,song.singer,song.cover,song.musicSrc)
    //this.setState({'name':'asdas'})
 
-   onChangeToSecondAudioList = () => {
-    const data = {
-      ...this.state.params,
-      clearPriorAudioLists: true,      
-      audioLists: audioList2
-    }
-    this.setState({
-      params: data
-    })
-  }
+//    onChangeToSecondAudioList = () => {
+//     const data = {
+//       ...this.state.params,
+//       clearPriorAudioLists: true,      
+//       audioLists: audioList2
+//     }
+//     this.setState({
+//       params: data
+//     })
+//   }
    onChangeToSecondAudioList = (name,singer,cover,src) => {
     
     const audioList2 = [
         {
             name: name,
             singer: singer,
-            cover: cover,
             cover: cover,
             musicSrc: src,
             showLyric: true    
@@ -128,21 +129,21 @@ class Home extends Component {
                                                 <h1>New Releases Albums</h1>
                                             </div>
                                             <div className="relaese_viewall_wrapper">
-                                                <a href="http://webstrot.com/html/tunein/html/index3.html#"> view all <i className="flaticon-right-arrow"></i></a>
+                                                <a href="http://localhost:3000#"> view all <i className="flaticon-right-arrow"></i></a>
                                             </div>
                                             <div className="release_tabs_wrapper">
                                                 <ul className="nav nav-tabs">
-                                                    <li className="nav-item"> <a className="nav-link active" data-toggle="tab" href="http://webstrot.com/html/tunein/html/index3.html#home"> hindi</a>
+                                                    <li className="nav-item"> <a className="nav-link active" data-toggle="tab" href="http://localhost:3000#home"> hindi</a>
                                                     </li>
-                                                    <li className="nav-item"> <a className="nav-link" data-toggle="tab" href="http://webstrot.com/html/tunein/html/index3.html#menu1">english</a>
+                                                    <li className="nav-item"> <a className="nav-link" data-toggle="tab" href="http://localhost:3000#menu1">english</a>
                                                     </li>
-                                                    <li className="nav-item"> <a className="nav-link" data-toggle="tab" href="http://webstrot.com/html/tunein/html/index3.html#menu2"> telugu</a>
+                                                    <li className="nav-item"> <a className="nav-link" data-toggle="tab" href="http://localhost:3000#menu2"> telugu</a>
                                                     </li>
-                                                    <li className="nav-item"> <a className="nav-link" data-toggle="tab" href="http://webstrot.com/html/tunein/html/index3.html#menu3"> punjabi</a>
+                                                    <li className="nav-item"> <a className="nav-link" data-toggle="tab" href="http://localhost:3000#menu3"> punjabi</a>
                                                     </li>
-                                                    <li className="nav-item"> <a className="nav-link" data-toggle="tab" href="http://webstrot.com/html/tunein/html/index3.html#menu4"> marathi </a>
+                                                    <li className="nav-item"> <a className="nav-link" data-toggle="tab" href="http://localhost:3000#menu4"> marathi </a>
                                                     </li>
-                                                    <li className="nav-item"> <a className="nav-link" data-toggle="tab" href="http://webstrot.com/html/tunein/html/index3.html#menu5"> bhojpuri</a>
+                                                    <li className="nav-item"> <a className="nav-link" data-toggle="tab" href="http://localhost:3000#menu5"> bhojpuri</a>
                                                     </li>
 
                                                 </ul>
@@ -154,12 +155,12 @@ class Home extends Component {
                                                 <div id="home" className="tab-pane active">
                                                     <div className="row">
                                                     {audioList1.map((song,key)=> 
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
+                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1" key={key}>
                                                             <div className="treanding_slider_main_box release_box_main_content m24_cover">
                                                                 <img src={song.cover} alt="img" />
                                                                 <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">{song.singer}</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">{song.name}</a></p>
+                                                                    <p><a href="http://localhost:3000#">{song.singer}</a></p>
+                                                                    <p className="various_artist_text"><a href="http://localhost:3000#">{song.name}</a></p>
                                                                 </div>
                                                                 <div className="m24_treanding_box_overlay release_box_overlay">
                                                                     <div className="m24_tranding_box_overlay"></div>
@@ -167,11 +168,11 @@ class Home extends Component {
                                                                         <i className="flaticon-menu"></i>
                                                                     </div>
                                                                     <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
+                                                                        <li><a href="http://localhost:3000#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
+                                                                        <li><a href="http://localhost:3000#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
+                                                                        <li><a href="http://localhost:3000#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
+                                                                        <li><a href="http://localhost:3000#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
+                                                                        <li><a href="http://localhost:3000#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
                                                                     </ul>
                                                                     <div className="tranding_play_icon">
                                                                         {/* <a className="sanjay" onClick={()=>{this.state.params.audioLists[0].name = this.song.name;this.state.params.audioLists[0].singer = this.song.singer;this.state.params.audioLists[0].musicSrc = this.song.musicSrc; }}> */}
@@ -184,195 +185,7 @@ class Home extends Component {
                                                             </div>
                                                         </div>
                                                         )}
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel1.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">Dilla Ther Jaa</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel2.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">Ik Vaari Aa jaa</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel3.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">Sadda Move song</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel4.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">me hoon don</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel5.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">wafa ne bewafai</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel6.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">tera chehra</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">Jabariya Jodi</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        
                                                     </div>
                                                 </div>
                                                 <div id="menu1" className="tab-pane fade">
@@ -382,8 +195,8 @@ class Home extends Component {
                                                             <div className="treanding_slider_main_box release_box_main_content m24_cover">
                                                                 <img src="./image/rel3.png" alt="img" />
                                                                 <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">Sadda Move song</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
+                                                                    <p><a href="http://localhost:3000#">Sadda Move song</a></p>
+                                                                    <p className="various_artist_text"><a href="http://localhost:3000#">Various Artists</a></p>
                                                                 </div>
                                                                 <div className="m24_treanding_box_overlay release_box_overlay">
                                                                     <div className="m24_tranding_box_overlay"></div>
@@ -391,1106 +204,38 @@ class Home extends Component {
                                                                         <i className="flaticon-menu"></i>
                                                                     </div>
                                                                     <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
+                                                                        <li><a href="http://localhost:3000#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
+                                                                        <li><a href="http://localhost:3000#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
+                                                                        <li><a href="http://localhost:3000#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
+                                                                        <li><a href="http://localhost:3000#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
+                                                                        <li><a href="http://localhost:3000#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
                                                                     </ul>
                                                                     <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
+                                                                        <a href="http://localhost:3000#">
                                                                             <i className="flaticon-play-button"></i>
                                                                         </a>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">Jabariya Jodi</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel1.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">Dilla Ther Jaa</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel2.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">Ik Vaari Aa jaa</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel4.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">me hoon don</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel6.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">tera chehra</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel5.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">wafa ne bewafai</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">Jabariya Jodi</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        
                                                     </div>
                                                 </div>
                                                 <div id="menu2" className="tab-pane fade">
-                                                    <div className="row">
-
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel2.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">Ik Vaari Aa jaa</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel3.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">Sadda Move song</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">Jabariya Jodi</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel1.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">Dilla Ther Jaa</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel4.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">me hoon don</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel5.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">wafa ne bewafai</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel6.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">tera chehra</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">Jabariya Jodi</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                    <div className="row">                                                        
                                                     </div>
                                                 </div>
 
                                                 <div id="menu3" className="tab-pane fade">
-                                                    <div className="row">
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel3.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">Sadda Move song</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel2.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">Ik Vaari Aa jaa</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">Jabariya Jodi</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel1.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">Dilla Ther Jaa</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel5.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">wafa ne bewafai</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel4.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">me hoon don</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel6.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">tera chehra</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">Jabariya Jodi</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                    <div className="row">                                                        
                                                     </div>
                                                 </div>
                                                 <div id="menu4" className="tab-pane fade">
-                                                    <div className="row">
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel3.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">Sadda Move song</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">Jabariya Jodi</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel2.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">Ik Vaari Aa jaa</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel1.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">Dilla Ther Jaa</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel5.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">wafa ne bewafai</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel6.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">tera chehra</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel4.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">me hoon don</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">Jabariya Jodi</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                    <div className="row">                                                        
                                                     </div>
                                                 </div>
                                                 <div id="menu5" className="tab-pane fade">
-                                                    <div className="row">
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel3.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">Sadda Move song</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel2.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">Ik Vaari Aa jaa</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">Jabariya Jodi</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel1.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">Dilla Ther Jaa</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel5.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">wafa ne bewafai</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel4.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">me hoon don</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel6.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">tera chehra</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1">
-                                                            <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src="./image/rel.png" alt="img" />
-                                                                <div className="release_content_artist release_content_artist2">
-                                                                    <p><a href="http://webstrot.com/html/tunein/html/index3.html#">Jabariya Jodi</a></p>
-                                                                    <p className="various_artist_text"><a href="http://webstrot.com/html/tunein/html/index3.html#">Various Artists</a></p>
-                                                                </div>
-                                                                <div className="m24_treanding_box_overlay release_box_overlay">
-                                                                    <div className="m24_tranding_box_overlay"></div>
-                                                                    <div className="m24_tranding_more_icon">
-                                                                        <i className="flaticon-menu"></i>
-                                                                    </div>
-                                                                    <ul className="tranding_more_option">
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-playlist"></i></span>Add To playlist</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-star"></i></span>favourite</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-share"></i></span>share</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-files-and-folders"></i></span>view lyrics</a></li>
-                                                                        <li><a href="http://webstrot.com/html/tunein/html/index3.html#"><span className="opt_icon"><i className="flaticon-trash"></i></span>delete</a></li>
-                                                                    </ul>
-                                                                    <div className="tranding_play_icon">
-                                                                        <a href="http://webstrot.com/html/tunein/html/index3.html#">
-                                                                            <i className="flaticon-play-button"></i>
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                    <div className="row">                                                        
                                                     </div>
                                                 </div>
                                             </div>
