@@ -3,6 +3,7 @@ import './home.css';
 //import AudioPlayer from 'react-h5-audio-player';
 import ReactJkMusicPlayer from "react-jinke-music-player";
 import "react-jinke-music-player/assets/index.css";
+const url = {"server":"http://localhost:3020/","img":"http://localhost:3020/img/","songs":"http://localhost:3020/songs/"};
 
 const audioList1 = [
     {
@@ -71,10 +72,39 @@ const audioList1 = [
 class Home extends Component {
     constructor(props){
         super(props);
-        this.state = {params:options}
+        this.state = {params:options,songs:[],default:[]}
        
 
    } 
+
+   componentDidMount(){
+
+        fetch(url.server+'allsong').then(res=>res.json()).then((res)=>{
+
+            var datasong = [];
+            var j = 3;
+            for( var i = 0; i < j; i++ ){
+                console.log(res[i]);
+                datasong.push({ name: res[i].name,singer: res[i].singer,cover: url.img+res[i].cover,musicSrc: url.songs+res[i].songs,showLyric: true });
+            }
+
+            console.log(datasong);
+
+            this.setState({songs:res})              
+            this.setState({default:datasong})              
+            const data = {
+                ...this.state.params,      
+                clearPriorAudioLists: true,
+                preload: true,
+                audioLists: this.state.default
+              }
+              this.setState({
+                params: data
+              })
+            //this.state.params.audioLists = this.state.songs;
+        })
+
+   }
 //    (song.name,song.singer,song.cover,song.musicSrc)
    //this.setState({'name':'asdas'})
 
@@ -113,7 +143,8 @@ class Home extends Component {
   }
     render() { 
         //console.log(audioList1);
-        const { params } = this.state
+        const { params,songs } = this.state
+        console.log(songs);
         return ( 
             <React.Fragment>
                     <div id="preloader">
@@ -154,10 +185,10 @@ class Home extends Component {
                                             <div className="tab-content">
                                                 <div id="home" className="tab-pane active">
                                                     <div className="row">
-                                                    {audioList1.map((song,key)=> 
+                                                    {songs.map((song,key)=> 
                                                         <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1" key={key}>
                                                             <div className="treanding_slider_main_box release_box_main_content m24_cover">
-                                                                <img src={song.cover} alt="img" />
+                                                                <img src={url.img+song.cover} alt="img" />
                                                                 <div className="release_content_artist release_content_artist2">
                                                                     <p><a href="http://localhost:3000#">{song.singer}</a></p>
                                                                     <p className="various_artist_text"><a href="http://localhost:3000#">{song.name}</a></p>
@@ -177,7 +208,7 @@ class Home extends Component {
                                                                     <div className="tranding_play_icon">
                                                                         {/* <a className="sanjay" onClick={()=>{this.state.params.audioLists[0].name = this.song.name;this.state.params.audioLists[0].singer = this.song.singer;this.state.params.audioLists[0].musicSrc = this.song.musicSrc; }}> */}
                                                                         {/* // this.onChangeToSecondAudioList(song.name,song.singer,song.cover,song.musicSrc) */}
-                                                                        <a className="sanjay" onClick={()=>this.onChangeToSecondAudioList(song.name,song.singer,song.cover,song.musicSrc)}>
+                                                                        <a className="sanjay" onClick={()=>this.onChangeToSecondAudioList(song.name,song.singer,url.img+song.cover,url.songs+song.songs)}>
                                                                             <i className="flaticon-play-button"></i>
                                                                         </a>
                                                                     </div>
@@ -245,50 +276,9 @@ class Home extends Component {
                                 </div>
                             </div>
 
-                {/* <div className="container">
-                    <div className="row">
-                    {audioList1.map((son,key)=>
-
-                        <div className="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                            <div className="hovereffect">
-                                <img className="img-responsive" src={son.cover} alt=""/>
-                                    <div className="overlay">
-                                        <h2>Effect 14</h2>
-                                        <p>
-                                            <a href="#">LINK HERE</a>
-                                        </p>
-                                    </div>
-                            </div>
-                        </div>
-                     ) }                   
-                    </div>
-
-                    <div className="row">
-                        <div className="col-sm">
-                            <h2>Welcome in music site</h2>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-sm">
-                        <div className="col-sm">
-                            <ul className="list-group">
-                              {audioList1.map((son,key)=>
-                                //   <li className="list-group-item" onClick={()=>{this.setState({'file':this.path+son.file})}}>{son.name}</li>
-                                  <li className="list-group-item" onClick={this.songhendler}>{son.name}</li>
-                              )}                                
-                                
-                            </ul>
-                        </div>
-                        </div>
-                        <div className="col-sm">
-                        One of three columns
-                        </div>
-                    </div>
-                </div> */}
                 <ReactJkMusicPlayer {...params} />
-                {/* <AudioPlayer  autoPlay src={this.state.file} onPlay={e => console.log("onPlay")}  /> */}
-               
                 </React.Fragment>
+                
          );
     }
 }
