@@ -3,7 +3,8 @@ import './home.css';
 //import AudioPlayer from 'react-h5-audio-player';
 import ReactJkMusicPlayer from "react-jinke-music-player";
 import "react-jinke-music-player/assets/index.css";
-const url = {"server":"http://localhost:3020/","img":"http://localhost:3020/img/","songs":"http://localhost:3020/songs/"};
+const rurl = "http://18.216.207.2:3020/";
+const url = {"server":rurl,"img":rurl+"img/","songs":rurl+"songs/"};
 
 const audioList1 = [
     {
