@@ -53,7 +53,11 @@ const audioList1 = [
       name: '难得',
       singer: '安来宁',
       cover: '//cdn.lijinke.cn/nande.jpg',
-      musicSrc: '//cdn.lijinke.cn/nande.mp3'
+      musicSrc: () => {
+        return Promise.resolve(
+          '//cdn.lijinke.cn/nande.mp3'
+        )
+      }
     }
   ]
 
@@ -73,7 +77,7 @@ const audioList1 = [
 class Home extends Component {
     constructor(props){
         super(props);
-        this.state = {params:options,songs:[],default:[]}
+        this.state = {params:options,allsongs:[],default:[]}
        
 
    } 
@@ -83,15 +87,31 @@ class Home extends Component {
         fetch(url.server+'allsong').then(res=>res.json()).then((res)=>{
 
             var datasong = [];
-            var j = 3;
-            for( var i = 0; i < j; i++ ){
-                console.log(res[i]);
-                datasong.push({ name: res[i].name,singer: res[i].singer,cover: url.img+res[i].cover,musicSrc: url.songs+res[i].songs,showLyric: true });
+
+            for( var i = 0; i < parseInt(res.length); i++ ){
+
+                 let sdata= url.songs+res[i].songs;
+                 let cover= url.img+res[i].cover;
+                 var audioList2 = {
+                        name: res[i].name,
+                        singer: res[i].singer,                        
+                        cover: () => {
+                            return Promise.resolve(
+                                cover
+                            )
+                          },
+                        showLyric: true,
+                        musicSrc: () => {
+                            return Promise.resolve(
+                                sdata
+                            )
+                          }
+                    }                    
+
+                datasong.push(audioList2);
             }
 
-            console.log(datasong);
-
-            this.setState({songs:res})              
+            this.setState({allsongs:res})              
             this.setState({default:datasong})              
             const data = {
                 ...this.state.params,      
@@ -125,8 +145,16 @@ class Home extends Component {
         {
             name: name,
             singer: singer,
-            cover: cover,
-            musicSrc: src,
+            cover: () => {
+                return Promise.resolve(
+                    cover
+                )
+              },
+            musicSrc: () => {
+                return Promise.resolve(
+                    src
+                )
+              },
             showLyric: true    
         }]
         
@@ -144,8 +172,8 @@ class Home extends Component {
   }
     render() { 
         //console.log(audioList1);
-        const { params,songs } = this.state
-        console.log(songs);
+        const { params,allsongs } = this.state
+       
         return ( 
             <React.Fragment>
                     <div id="preloader">
@@ -186,7 +214,7 @@ class Home extends Component {
                                             <div className="tab-content">
                                                 <div id="home" className="tab-pane active">
                                                     <div className="row">
-                                                    {songs.map((song,key)=> 
+                                                    {allsongs.map((song,key)=> 
                                                         <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12 pd1" key={key}>
                                                             <div className="treanding_slider_main_box release_box_main_content m24_cover">
                                                                 <img src={url.img+song.cover} alt="img" />

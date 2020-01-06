@@ -7019,9 +7019,9 @@ span.ovrly_text2 {
 .progress-bar{
 	background-color: transparent !important;
 }
-.rc-slider-handle{
+/* .rc-slider-handle{
 	margin-left: 7px;
-}
+} */
 .release_box_main_content img {
     border-radius: 0;
     width: 100%;
