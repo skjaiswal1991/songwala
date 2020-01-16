@@ -121,3 +121,10 @@
 .toppad
 {margin-top:20px;
 }
+
+table.table.table-user-information {
+  margin-left: 295px;
+}
+.small-icon-img{
+  width: 5%;
+}
