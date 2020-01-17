@@ -15,11 +15,8 @@ const initStart = {
         name: 'ajay',
         singer: '薛之谦',
         cover: '//cdn.lijinke.cn/nande.jpg',
-        musicSrc: () => {
-           return Promise.resolve(
-             '//cdn.lijinke.cn/gaoshang.mp3'
-           )
-         },      
+        musicSrc: () => { return Promise.resolve( '//cdn.lijinke.cn/gaoshang.mp3' ) },
+        //musicSrc:'//cdn.lijinke.cn/gaoshang.mp3',      
         showLyric: true    
       }],
     options : {
@@ -29,7 +26,7 @@ const initStart = {
         bounds: 'body',
         mode: 'full',
         remember: false,
-        preload: "auto",
+        preload: true,
         autoPlay: true,
         autoPlayInitLoadPlayList: true
       }
@@ -51,9 +48,24 @@ const rootReducer = (state = initStart, action) =>{
         }
     }else if(action.type === 'ADD_POST'){
 
-        let newpost = action.data;
-        
-        return {...state,post:newpost}
+      console.log(action.data);  
+      //console.log(state.options);
+
+      let change =  {...state.params,      
+                clearPriorAudioLists: true,
+                autoPlayInitLoadPlayList: true,
+                mode: 'full',
+                preload: true,
+                autoPlay:true,
+                audioLists: action.data};
+
+      //let change = {...state.options,['audioLists']:state.post}
+
+       // console.log(change);
+      //let newpost = action.data;
+
+
+        return {...state,options:change}
     }
 
     return state;

@@ -76,7 +76,7 @@ class Song extends Component {
             this.setState({allsongs:res}) 
             this.setState({default:datasong}) 
 
-            this.props.pushdata(this.state.default);
+           this.props.pushdata(this.state.default);
             
                          
             const data = {
@@ -135,17 +135,17 @@ class Song extends Component {
             showLyric: true    
         }]
         
-    
+        this.props.pushdata(audioList2);
 
-    const data = {
-      ...this.state.params,      
-      clearPriorAudioLists: true,
-      preload: true,
-      audioLists: audioList2
-    }
-    this.setState({
-      params: data
-    })
+    // const data = {
+    //   ...this.state.params,      
+    //   clearPriorAudioLists: true,
+    //   preload: true,
+    //   audioLists: audioList2
+    // }
+    // this.setState({
+    //   params: data
+    // })
   }
  
    

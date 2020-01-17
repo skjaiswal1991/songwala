@@ -8,10 +8,10 @@ const audioList1 = [
       singer: '薛之谦',
       cover: '//cdn.lijinke.cn/nande.jpg',
       musicSrc: () => {
-         return Promise.resolve(
-           '//cdn.lijinke.cn/gaoshang.mp3'
-         )
-       },      
+          return Promise.resolve(
+            '//cdn.lijinke.cn/gaoshang.mp3'
+          )
+        },      
       showLyric: true    
     }
   ]
@@ -41,70 +41,6 @@ class Footer extends Component {
        // }
         
     }
-
-    componentDidMount(){
-
-      const data = {
-        ...this.state.params,      
-        clearPriorAudioLists: true,
-        preload: true,
-        audioLists: audioList1
-      }
-      this.setState({
-        params: data
-      })
-    }
-
-    shouldComponentUpdate(nextProps, nextState){
-      // console.log("I am here");
-      // const data = {
-      //   ...this.state.params,
-      //   audioLists:audioList1
-         
-      // }
-      // console.log(data);
-      // this.setState({
-      //    params: data
-      // })
-    }
-    static getDerivedStateFromProps(props, state){
-      // console.log(props);
-      // console.log(state);
-      // const data = {
-      //   ...state.params,      
-      //   clearPriorAudioLists: true,
-      //   preload: true,
-      //   audioLists: props.listsongs
-      // }
-      // this.setState({
-      //   params: data
-      // })
-    }
-    componentWillUpdate(){
-
-      console.log("I am here");
-      const data = {
-        ...this.state.params,
-        audioLists:[this.props.listsongs ]
-         
-      }
-      console.log(data);
-      this.setState({
-         params: data
-      })
-    
-
-      // const data = {
-      //   ...this.state.params,      
-      //   clearPriorAudioLists: true,
-      //   preload: true,
-      //   audioLists: this.props.listsongs
-      // }
-      // this.setState({
-      //   params: data
-      // })
-    }
-    
     
     render() {
          
@@ -119,10 +55,13 @@ class Footer extends Component {
 }
 
 const mapStatetoProp = (state) =>{
+  console.log(state.options);
   return{
       listsongs:state.post,
       listdata:state.options
   }
 }
+
+
  
 export default connect(mapStatetoProp)(Footer);
